@@ -10,8 +10,9 @@ class NewsRepositoryImpl implements NewsRepository {
   final RemoteNewsSource _remoteNewsSource;
 
   @override
-  Future<Page<News>> getNewsList(PageKey? pageKey) {
-    // TODO: implement getNewsList
-    throw UnimplementedError();
+  Future<Page<News>> getNewsList(PageKey? pageKey) async {
+    return _localNewsSource
+        .getNewsList(pageKey)
+        .catchError((e) => _remoteNewsSource.getNewsList(pageKey));
   }
 }
