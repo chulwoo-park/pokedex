@@ -16,7 +16,6 @@ class GetNewsList with FutureUseCase<GetNewsListParams, Page<News>> {
 
   @override
   Future<Page<News>> call([GetNewsListParams? params]) {
-    // TODO: implement call
-    throw UnimplementedError();
+    return _newsRepository.getNewsList(params?.key);
   }
 }
