@@ -12,7 +12,7 @@ import 'usecase_test.mocks.dart';
 
 @GenerateMocks([NewsRepository])
 void main() {
-  group('GetNewsList test', () {
+  group('get news list test', () {
     final newsRepository = MockNewsRepository();
     final getNewsList = GetNewsList(newsRepository);
 
@@ -26,7 +26,7 @@ void main() {
     testThat(
       givenSomePages
           .when(
-            'GetNewsList without parameters',
+            'get news list without parameters',
             getNewsList,
           )
           .then(
@@ -38,7 +38,7 @@ void main() {
     testThat(
       givenSomePages
           .when(
-            'GetNewsList with null parameter',
+            'get news list with null parameter',
             () => getNewsList(null),
           )
           .then(
@@ -50,7 +50,7 @@ void main() {
     testThat(
       givenSomePages
           .when(
-            'GetNewsList any parameter',
+            'get news list any parameter',
             () => getNewsList(GetNewsListParams(MockPageKey())),
           )
           .then(
@@ -62,7 +62,7 @@ void main() {
     testThat(
       givenSomePages
           .when(
-            'GetNewsList',
+            'get news list',
             getNewsList,
           )
           .then(
