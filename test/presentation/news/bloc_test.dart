@@ -4,6 +4,8 @@ import 'package:pokedex/src/domain/common/page.dart';
 import 'package:pokedex/src/domain/news/entity.dart';
 import 'package:pokedex/src/domain/news/usecase.dart';
 import 'package:pokedex/src/presentation/common/state.dart';
+import 'package:pokedex/src/presentation/news/bloc.dart';
+import 'package:pokedex/src/presentation/news/event.dart';
 
 import '../../domain/mock.dart';
 import '../../given_when_then/given_when_then.dart';
