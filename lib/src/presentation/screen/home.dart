@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+import '../route/model.dart';
+
 class HomeScreen extends StatelessWidget {
+  static RouteConfig get route => RouteConfig(
+        path: '/',
+        builder: () => HomeScreen(),
+      );
+
+  const HomeScreen();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
