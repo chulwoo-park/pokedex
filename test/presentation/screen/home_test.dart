@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:pokedex/src/presentation/screen/home.dart';
+import 'package:pokedex/src/presentation/screen/home/home.dart';
 
 import '../../given_when_then/widget_given_when_then.dart';
 
