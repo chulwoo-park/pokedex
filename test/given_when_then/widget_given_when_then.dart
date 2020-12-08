@@ -16,9 +16,11 @@ Then then(String description, WidgetDefine define) => Then(description, define);
 
 mockito.Expectation get mockWhen => mockito.when;
 
+typedef GivenWhenThen = Then Function();
+
 @isTest
-void testThat(Then givenWhenThen) {
-  givenWhenThen.test();
+void testThat(GivenWhenThen givenWhenThen) {
+  givenWhenThen().test();
 }
 
 class Given {

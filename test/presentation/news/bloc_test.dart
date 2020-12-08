@@ -20,7 +20,7 @@ void main() {
     final bloc = NewsListBloc(getNewsList);
 
     testThat(
-      given(
+      () => given(
         'some news list',
         () => mockWhen(getNewsList()).thenAnswer((_) async => newsPage),
       )
@@ -41,7 +41,7 @@ void main() {
     );
 
     testThat(
-      given(
+      () => given(
         'empty list',
         () =>
             mockWhen(getNewsList()).thenAnswer((_) async => Page<News>.empty()),
@@ -63,7 +63,7 @@ void main() {
     );
 
     testThat(
-      given(
+      () => given(
         'an error',
         () => mockWhen(getNewsList())
             .thenAnswer((_) => Future.error(MockException(), StackTrace.empty)),

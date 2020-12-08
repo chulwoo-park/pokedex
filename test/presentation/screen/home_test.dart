@@ -11,7 +11,7 @@ void main() {
     final title = 'what pokemon\nare you looking for?';
     final searchText = 'Search Pokemon, Move, Ability etc';
     testThat(
-      when(
+      () => when(
         'i enters the home screen',
         (tester) => tester.pumpWidget(screen),
       )

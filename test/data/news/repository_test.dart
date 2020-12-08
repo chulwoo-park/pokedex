@@ -41,7 +41,7 @@ void main() {
     );
 
     testThat(
-      givenNonNullLocalData
+      () => givenNonNullLocalData
           .andThat(givenNonNullRemoteData)
           .when(
             'get news list',
@@ -54,7 +54,7 @@ void main() {
     );
 
     testThat(
-      givenNullLocalData
+      () => givenNullLocalData
           .andThat(givenNonNullRemoteData)
           .when(
             'get news list',
@@ -74,7 +74,7 @@ void main() {
     );
 
     testThat(
-      givenNonNullLocalData
+      () => givenNonNullLocalData
           .when(
             'get news list with null parameter',
             () => repository.getNewsList(null),

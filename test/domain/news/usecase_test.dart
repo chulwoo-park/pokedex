@@ -24,7 +24,7 @@ void main() {
     });
 
     testThat(
-      givenSomePages
+      () => givenSomePages
           .when(
             'get news list without parameters',
             getNewsList,
@@ -36,7 +36,7 @@ void main() {
     );
 
     testThat(
-      givenSomePages
+      () => givenSomePages
           .when(
             'get news list with null parameter',
             () => getNewsList(null),
@@ -48,7 +48,7 @@ void main() {
     );
 
     testThat(
-      givenSomePages
+      () => givenSomePages
           .when(
             'get news list any parameter',
             () => getNewsList(GetNewsListParams(MockPageKey())),
@@ -60,7 +60,7 @@ void main() {
     );
 
     testThat(
-      givenSomePages
+      () => givenSomePages
           .when(
             'get news list',
             getNewsList,

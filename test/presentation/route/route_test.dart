@@ -10,7 +10,7 @@ import '../../given_when_then/widget_given_when_then.dart';
 void main() {
   group('Route', () {
     testThat(
-      when('i enter the app', (tester) async {
+      () => when('i enter the app', (tester) async {
         await tester.pumpWidget(
           MaterialApp.router(
             theme: ThemeData.light(),
