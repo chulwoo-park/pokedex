@@ -8,7 +8,7 @@ void main() {
   group('HomeScreen', () {
     final screen = MaterialApp(home: HomeScreen());
 
-    final title = 'what pokemon\nare you looking for?';
+    final title = 'What pokemon\nare you looking for?';
     final searchText = 'Search Pokemon, Move, Ability etc';
     testThat(
       () => when(
@@ -46,6 +46,14 @@ void main() {
           .and(
             'i can see Type Charts card',
             () => expect(find.text('Type Charts'), findsOneWidget),
+          )
+          .and(
+            'i can see News list',
+            () => expect(find.text('Pokémon News'), findsOneWidget),
+          )
+          .and(
+            'i can see empty news message',
+            () => expect(find.text('There is no news today.'), findsOneWidget),
           ),
     );
   });
