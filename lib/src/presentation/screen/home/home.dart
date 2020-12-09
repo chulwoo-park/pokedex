@@ -112,11 +112,52 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
+            SliverToBoxAdapter(
+              child: Stack(
+                children: [
+                  Container(
+                    height: 60.0,
+                    color: R.color.whisper,
+                  ),
+                  Container(
+                    height: 60.0,
+                    decoration: BoxDecoration(
+                      color: R.color.white,
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(30.0),
+                        bottomRight: Radius.circular(30.0),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
             SliverFillRemaining(
               hasScrollBody: false,
-              child: Padding(
-                padding: horizontalPadding.copyWith(top: 20.0),
-                child: Container(),
+              child: Container(
+                color: R.color.whisper,
+                padding: horizontalPadding.copyWith(top: 40.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Pokémon News',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w900,
+                        fontSize: 20.0,
+                      ),
+                    ),
+                    Center(
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 60.0),
+                        child: Opacity(
+                          opacity: 0.6,
+                          child: Text('There is no news today.'),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ],

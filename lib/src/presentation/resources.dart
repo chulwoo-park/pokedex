@@ -16,9 +16,10 @@ class _Colors {
   const _Colors();
 
   final white = const Color(0xffffffff);
+  final whiteSmoke = const Color(0xfff4f4f4);
+  final whisper = const Color(0xffebebeb);
 
   final licorice = const Color(0xff303943);
-  final whiteSmoke = const Color(0xfff4f4f4);
 
   final shamrock = const Color(0xff2cdab1);
   final puertoRico = const Color(0xff4fc1a6);
