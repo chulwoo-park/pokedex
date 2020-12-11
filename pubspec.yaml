@@ -11,16 +11,34 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  # DI
+  get_it: 6.0.0-nullsafety.1
+
+  # model class utils
   equatable: ^2.0.0-nullsafety.0
+  json_annotation: ^4.0.0-nullsafety.0
+
+  # presentation logic holder
   flutter_bloc: ^6.1.1
+
+  # icon
   font_awesome_flutter: ^8.10.1
+
+  # network
+  dio: ^3.0.10
+
+  # other utils
+  intl:  0.17.0-nullsafety.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   effective_dart: ^1.3.0
   mockito: ^4.1.3
-  build_runner: ^1.10.7
+  build_runner: ^1.10.9
+  analyzer: ^0.40.6
+  json_serializable: ^4.0.0-nullsafety.0
 
 flutter:
   uses-material-design: true
