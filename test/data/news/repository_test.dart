@@ -10,6 +10,8 @@ import '../../test.mocks.dart';
 void main() {
   group('NewsRepositoryImpl', () {
     final localNewsSource = MockLocalNewsSource();
+    mockWhen(localNewsSource.setNewsList(any, any))
+        .thenAnswer((_) => Future.value());
     final remoteNewsSource = MockRemoteNewsSource();
     final repository = NewsRepositoryImpl(localNewsSource, remoteNewsSource);
 
@@ -34,6 +36,19 @@ void main() {
       'non-null remote data',
       () => mockWhen(remoteNewsSource.getNewsList(any))
           .thenAnswer((_) async => remotePage),
+    );
+
+    testThat(
+      () => givenNullLocalData
+          .andThat(givenNonNullRemoteData)
+          .when(
+            'get news list',
+            () => repository.getNewsList(pageKey),
+          )
+          .then(
+            'then save remote data in local storage',
+            (result) => verify(localNewsSource.setNewsList(any, any)),
+          ),
     );
 
     testThat(
@@ -65,6 +80,7 @@ void main() {
             () => verifyInOrder([
               localNewsSource.getNewsList(any),
               remoteNewsSource.getNewsList(any),
+              localNewsSource.setNewsList(any, any),
             ]),
           ),
     );
