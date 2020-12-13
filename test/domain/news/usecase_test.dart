@@ -1,16 +1,12 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:pokedex/src/domain/common/page.dart';
 import 'package:pokedex/src/domain/news/entity.dart';
-import 'package:pokedex/src/domain/news/repository.dart';
 import 'package:pokedex/src/domain/news/usecase.dart';
 
 import '../../given_when_then/given_when_then.dart';
-import '../mock.dart';
-import 'usecase_test.mocks.dart';
+import '../../test.mocks.dart';
 
-@GenerateMocks([NewsRepository])
 void main() {
   group('get news list test', () {
     final newsRepository = MockNewsRepository();
@@ -31,7 +27,7 @@ void main() {
           )
           .then(
             'page loaded',
-            (result) => expectLater(result, completion(Page<News>())),
+            (result) => expect(result, Page<News>()),
           ),
     );
 
@@ -43,7 +39,7 @@ void main() {
           )
           .then(
             'page loaded',
-            (result) => expectLater(result, completion(Page<News>())),
+            (result) => expect(result, Page<News>()),
           ),
     );
 
@@ -55,7 +51,7 @@ void main() {
           )
           .then(
             'page loaded',
-            (result) => expectLater(result, completion(Page<News>())),
+            (result) => expect(result, Page<News>()),
           ),
     );
 

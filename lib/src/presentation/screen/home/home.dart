@@ -1,12 +1,10 @@
 import 'dart:math';
 
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:intl/intl.dart';
-
 import 'package:flutter/material.dart' hide Page;
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:pokedex/src/di/module.dart';
 import 'package:pokedex/src/presentation/news/event.dart';
 
@@ -20,13 +18,24 @@ import '../widget/overscroll_backdrop.dart';
 import '../widget/search_bar.dart';
 import 'widget/category_card.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   static RouteConfig get route => RouteConfig(
         path: '/',
         builder: () => HomeScreen(),
       );
 
-  final _newsBloc = NewsListBloc(getIt.get())..add(NewsListRequested());
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final _newsBloc = NewsListBloc(getIt.get());
+
+  @override
+  void initState() {
+    super.initState();
+    _newsBloc.add(NewsListRequested());
+  }
 
   @override
   Widget build(BuildContext context) {

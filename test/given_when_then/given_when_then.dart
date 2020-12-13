@@ -1,9 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter_test/flutter_test.dart' as flutter_test;
 import 'package:meta/meta.dart';
 import 'package:mockito/mockito.dart' as mockito;
 
 typedef Define = dynamic Function();
-typedef TypedDefine<T> = T Function();
+typedef TypedDefine<T> = FutureOr<T> Function();
 typedef ResultDefine<T> = dynamic Function(T result);
 
 Given given(String description, Define define) => Given(description, define);
@@ -233,9 +235,9 @@ class Then<T> {
         defines = defines.reversed.toList();
 
         for (var i = 0; i < descriptions.length; i++) {
-          flutter_test.test(descriptions[i], () {
+          flutter_test.test(descriptions[i], () async {
             final define = defines[i];
-            final result = when.define();
+            var result = await when.define();
             if (define is ResultDefine) {
               define(result);
             } else if (define is Define) {

@@ -1,5 +1,5 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
 import 'package:pokedex/src/domain/common/page.dart';
 import 'package:pokedex/src/domain/news/entity.dart';
 import 'package:pokedex/src/domain/news/usecase.dart';
@@ -7,11 +7,9 @@ import 'package:pokedex/src/presentation/common/state.dart';
 import 'package:pokedex/src/presentation/news/bloc.dart';
 import 'package:pokedex/src/presentation/news/event.dart';
 
-import '../../domain/mock.dart';
 import '../../given_when_then/given_when_then.dart';
-import 'bloc_test.mocks.dart';
+import '../../test.mocks.dart';
 
-@GenerateMocks([GetNewsList])
 void main() {
   group('NewsBloc', () {
     final newsPage = Page(items: [News(id: 0, title: 'News')]);
@@ -84,4 +82,15 @@ void main() {
           ),
     );
   });
+}
+
+@immutable
+class MockException implements Exception {
+  @override
+  bool operator ==(Object other) {
+    return other is MockException;
+  }
+
+  @override
+  int get hashCode => 37;
 }

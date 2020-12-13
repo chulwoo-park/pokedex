@@ -1,16 +1,12 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:pokedex/src/data/news/data_source.dart';
 import 'package:pokedex/src/data/news/repository.dart';
 import 'package:pokedex/src/domain/common/page.dart';
 import 'package:pokedex/src/domain/news/entity.dart';
 
-import '../../domain/mock.dart';
 import '../../given_when_then/given_when_then.dart';
-import 'repository_test.mocks.dart';
+import '../../test.mocks.dart';
 
-@GenerateMocks([LocalNewsSource, RemoteNewsSource])
 void main() {
   group('NewsRepositoryImpl', () {
     final localNewsSource = MockLocalNewsSource();
@@ -49,7 +45,7 @@ void main() {
           )
           .then(
             'return data using local data',
-            (result) => expectLater(result, completion(localPage)),
+            (result) => expect(result, localPage),
           ),
     );
 
@@ -62,13 +58,13 @@ void main() {
           )
           .then(
             'return data using remote data',
-            (result) => expectLater(result, completion(remotePage)),
+            (result) => expect(result, remotePage),
           )
           .and(
             'find local data source first',
             () => verifyInOrder([
-              localNewsSource.getNewsList(pageKey),
-              remoteNewsSource.getNewsList(pageKey),
+              localNewsSource.getNewsList(any),
+              remoteNewsSource.getNewsList(any),
             ]),
           ),
     );
@@ -81,7 +77,7 @@ void main() {
           )
           .then(
             'page loaded',
-            (result) => expectLater(result, completion(localPage)),
+            (result) => expect(result, localPage),
           ),
     );
   });
