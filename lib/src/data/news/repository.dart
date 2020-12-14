@@ -11,8 +11,15 @@ class NewsRepositoryImpl implements NewsRepository {
 
   @override
   Future<Page<News>> getNewsList(PageKey? pageKey) async {
-    return _localNewsSource
-        .getNewsList(pageKey)
-        .catchError((e) => _remoteNewsSource.getNewsList(pageKey));
+    return _localNewsSource.getNewsList(pageKey).catchError(
+          (e) => _remoteNewsSource
+              .getNewsList(pageKey)
+              .then((page) => _saveToLocal(pageKey, page)),
+        );
+  }
+
+  Future<Page<News>> _saveToLocal(PageKey? pageKey, Page<News> page) async {
+    await _localNewsSource.setNewsList(pageKey, page);
+    return page;
   }
 }

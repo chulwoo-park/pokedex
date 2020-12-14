@@ -39,4 +39,10 @@ class MockLocalNewsSource implements LocalNewsSource {
     // TODO: implement getNewsList
     throw UnimplementedError();
   }
+
+  @override
+  Future<void> setNewsList(PageKey? pageKey, Page<News> page) {
+    // TODO: implement setNewsList
+    throw UnimplementedError();
+  }
 }
