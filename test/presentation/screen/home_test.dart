@@ -63,14 +63,21 @@ void main() {
               () => expect(find.text('Type Charts'), findsOneWidget),
             )
             .and(
-              'i can see News list',
-              () => expect(find.text('Pokémon News'), findsOneWidget),
-            )
-            .and(
+          'i can see News list',
+          (tester) {
+            expect(
+              find.text('Pokémon News', skipOffstage: false),
+              findsOneWidget,
+            );
+          },
+        ).and(
           'i can see empty news message',
           (tester) async {
             await tester.pump();
-            expect(find.text('There is no news today.'), findsOneWidget);
+            expect(
+              find.text('There is no news today.', skipOffstage: false),
+              findsOneWidget,
+            );
           },
         );
       },
