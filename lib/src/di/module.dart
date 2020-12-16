@@ -12,6 +12,7 @@ final getIt = GetIt.instance;
 
 void setUpDomain() {
   getIt.registerFactory(() => GetNewsList(getIt.get()));
+  getIt.registerFactory(() => RefreshNewsList(getIt.get()));
 }
 
 void setUpData() {

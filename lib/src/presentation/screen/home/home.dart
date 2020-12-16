@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart' hide Page;
@@ -31,10 +32,12 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   late NewsListBloc _newsBloc;
 
+  Completer? _refreshCompleter;
+
   @override
   void initState() {
     super.initState();
-    _newsBloc = NewsListBloc(getIt.get());
+    _newsBloc = NewsListBloc(getIt.get(), getIt.get());
     _newsBloc.add(NewsListRequested());
   }
 
@@ -62,7 +65,8 @@ class _HomeScreenState extends State<HomeScreen> {
           body: RefreshIndicator(
             displacement: 80.0,
             onRefresh: () async {
-              _newsBloc.add(NewsListRequested());
+              _newsBloc.add(NewsListRequested(refresh: true));
+              return _refreshCompleter?.future;
             },
             child: CustomScrollView(
               slivers: [
@@ -175,14 +179,23 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Container(
                     color: R.color.whisper,
                     padding: horizontalPadding,
-                    child: BlocBuilder<NewsListBloc, AsyncState>(
+                    child: BlocConsumer<NewsListBloc, AsyncState>(
+                      listener: (context, state) {
+                        if (state is LoadSuccess) {
+                          _refreshCompleter?.complete();
+                          _refreshCompleter = Completer();
+                        }
+                      },
                       cubit: _newsBloc,
                       builder: (context, state) {
                         final listPadding =
                             EdgeInsets.only(top: 38.0, bottom: 80.0);
+                        final physics = NeverScrollableScrollPhysics();
                         if (state is Loading) {
                           return ListView(
                             padding: listPadding,
+                            physics: physics,
+                            shrinkWrap: true,
                             children: [
                               _NewsTitle(),
                               _NewsLoading(),
@@ -192,6 +205,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           if (state.data.items.isEmpty) {
                             return ListView(
                               padding: listPadding,
+                              physics: physics,
                               children: [
                                 _NewsTitle(),
                                 _NewsEmpty(),
@@ -200,8 +214,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           } else {
                             return ListView.separated(
                               padding: listPadding,
+                              physics: physics,
                               shrinkWrap: true,
-                              physics: NeverScrollableScrollPhysics(),
                               itemBuilder: (context, index) {
                                 if (index == 0) {
                                   return _NewsTitle();
@@ -265,6 +279,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         // TODO error
                         return ListView(
                           padding: listPadding,
+                          physics: physics,
                           children: [
                             _NewsTitle(),
                           ],
@@ -298,10 +313,11 @@ class _NewsTitle extends StatelessWidget {
 class _NewsLoading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(top: 80.0),
-      child: SizedBox.fromSize(
-        size: Size.square(15.0),
+    return Container(
+      width: 45.0,
+      height: 45.0,
+      margin: EdgeInsets.only(top: 50.0),
+      child: Center(
         child: CircularProgressIndicator(
           valueColor: AlwaysStoppedAnimation(R.color.licorice),
           strokeWidth: 2.0,
