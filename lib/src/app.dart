@@ -14,6 +14,8 @@ class PokedexApp extends StatelessWidget {
     return MaterialApp.router(
       title: 'Pokedex',
       theme: theme.copyWith(
+        canvasColor: R.color.white,
+        accentColor: R.color.licorice,
         iconTheme: theme.iconTheme.copyWith(
           color: R.color.licorice,
         ),
