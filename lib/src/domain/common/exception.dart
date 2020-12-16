@@ -1,0 +1,1 @@
+class CacheNotFound implements Exception {}
