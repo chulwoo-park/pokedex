@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
 
-import 'exception.dart';
+import '../../domain/common/exception.dart';
 import 'model.dart';
 
 // TODO: improvement caching

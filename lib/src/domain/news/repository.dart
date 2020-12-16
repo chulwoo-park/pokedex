@@ -3,5 +3,5 @@ import 'entity.dart';
 
 // ignore: one_member_abstracts
 abstract class NewsRepository {
-  Future<Page<News>> getNewsList(PageKey? pageKey);
+  Future<Page<News>> getNewsList(PageKey? pageKey, {bool useCache = true});
 }
