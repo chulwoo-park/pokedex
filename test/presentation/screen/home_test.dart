@@ -16,6 +16,7 @@ void main() {
       () {
         final repo = MockNewsRepository();
         getIt.registerSingleton<GetNewsList>(GetNewsList(repo));
+        getIt.registerSingleton<RefreshNewsList>(RefreshNewsList(repo));
 
         final screen = MaterialApp(home: HomeScreen());
 

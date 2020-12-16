@@ -17,6 +17,7 @@ void main() {
         final repo = MockNewsRepository();
         mockWhen(repo.getNewsList(any)).thenThrow(Exception());
         getIt.registerSingleton<GetNewsList>(GetNewsList(repo));
+        getIt.registerSingleton<RefreshNewsList>(RefreshNewsList(repo));
 
         return when('i enter the app', (tester) async {
           await tester.pumpWidget(
