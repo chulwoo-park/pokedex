@@ -10,6 +10,7 @@ import 'package:pokedex/src/domain/news/usecase.dart';
   RemoteNewsSource,
   LocalNewsSource,
   GetNewsList,
+  RefreshNewsList,
   Exception,
 ])
 void main() {}

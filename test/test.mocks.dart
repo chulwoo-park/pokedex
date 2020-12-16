@@ -75,6 +75,18 @@ class MockGetNewsList extends _i1.Mock implements _i7.GetNewsList {
           Future.value(_FakePage<_i5.News>()));
 }
 
+/// A class which mocks [RefreshNewsList].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockRefreshNewsList extends _i1.Mock implements _i7.RefreshNewsList {
+  MockRefreshNewsList() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  _i4.Future<_i2.Page<_i5.News>> call([void _]) => super.noSuchMethod(
+      Invocation.method(#call, []), Future.value(_FakePage<_i5.News>()));
+}
+
 /// A class which mocks [Exception].
 ///
 /// See the documentation for Mockito's code generation for more information.

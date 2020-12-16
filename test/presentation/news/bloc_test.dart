@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
 import 'package:pokedex/src/domain/common/page.dart';
 import 'package:pokedex/src/domain/news/entity.dart';
 import 'package:pokedex/src/domain/news/usecase.dart';
@@ -15,7 +16,33 @@ void main() {
     final newsPage = Page(items: [News(id: 0, title: 'News')]);
 
     final GetNewsList getNewsList = MockGetNewsList();
-    final bloc = NewsListBloc(getNewsList);
+    final RefreshNewsList refreshNewsList = MockRefreshNewsList();
+
+    final bloc = NewsListBloc(
+      refreshNewsList,
+      getNewsList,
+    );
+
+    testThat(
+      () => given(
+        'some news list',
+        () => mockWhen(refreshNewsList()).thenAnswer((_) async => newsPage),
+      )
+          .when(
+            'request news list with [refresh] to true',
+            () => bloc.add(NewsListRequested(refresh: true)),
+          )
+          .then(
+            'the news list is loaded',
+            () => expectLater(
+              bloc,
+              emitsInOrder([
+                Loading(),
+                LoadSuccess(newsPage),
+              ]),
+            ),
+          ),
+    );
 
     testThat(
       () => given(
