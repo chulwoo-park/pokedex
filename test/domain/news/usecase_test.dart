@@ -67,4 +67,43 @@ void main() {
           ),
     );
   });
+
+  group('refresh news list test', () {
+    final newsRepository = MockNewsRepository();
+    final refreshNewsList = RefreshNewsList(newsRepository);
+
+    final givenSomePages = given('some pages', () {
+      mockWhen(newsRepository.getNewsList(null, useCache: anyNamed('useCache')))
+          .thenAnswer((_) async => Page<News>());
+      mockWhen(newsRepository.getNewsList(any, useCache: anyNamed('useCache')))
+          .thenAnswer((_) async => Page<News>());
+    });
+
+    testThat(
+      () => givenSomePages
+          .when(
+            'refresh news list called',
+            refreshNewsList,
+          )
+          .then(
+            'page loaded',
+            (result) => expect(result, Page<News>()),
+          ),
+    );
+
+    testThat(
+      () => givenSomePages
+          .when(
+            'refresh news list',
+            refreshNewsList,
+          )
+          .then(
+            'get data from repository with [useCache] to false',
+            () => verify(newsRepository.getNewsList(
+              any,
+              useCache: false,
+            )),
+          ),
+    );
+  });
 }

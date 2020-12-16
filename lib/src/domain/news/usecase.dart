@@ -9,6 +9,8 @@ class GetNewsListParams {
   const GetNewsListParams(this.key);
 }
 
+class RefreshNewsList {}
+
 class GetNewsList with FutureUseCase<GetNewsListParams, Page<News>> {
   const GetNewsList(this._newsRepository);
 

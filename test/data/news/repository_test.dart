@@ -96,5 +96,18 @@ void main() {
             (result) => expect(result, localPage),
           ),
     );
+
+    testThat(
+      () => givenNonNullLocalData
+          .andThat(givenNonNullRemoteData)
+          .when(
+            'get news list with [useCache] to false',
+            () => repository.getNewsList(null, useCache: false),
+          )
+          .then(
+            'return data using remote data',
+            (result) => expect(result, remotePage),
+          ),
+    );
   });
 }

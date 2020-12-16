@@ -25,8 +25,10 @@ class MockNewsRepository extends _i1.Mock implements _i3.NewsRepository {
     _i1.throwOnMissingStub(this);
   }
 
-  _i4.Future<_i2.Page<_i5.News>> getNewsList(_i2.PageKey? pageKey) =>
-      super.noSuchMethod(Invocation.method(#getNewsList, [pageKey]),
+  _i4.Future<_i2.Page<_i5.News>> getNewsList(_i2.PageKey? pageKey,
+          {bool? useCache = true}) =>
+      super.noSuchMethod(
+          Invocation.method(#getNewsList, [pageKey], {#useCache: useCache}),
           Future.value(_FakePage<_i5.News>()));
 }
 
